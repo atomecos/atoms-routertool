@@ -18,8 +18,8 @@ describe('router.js tests', () => {
     });
   });
 
-  describe('#parseFrom()', () => {
-    it('expect to parse from routes', () => {
+  describe('#setRoutes()', () => {
+    it('expect to set routes', () => {
       // arranges
       const routes = {
         'GET /product': { topic: 'topic', type: 'type', quality: 'quality' },
@@ -30,22 +30,22 @@ describe('router.js tests', () => {
       const instance = new Router();
 
       // acts
-      const length = instance.parseFrom(routes);
+      const length = instance.setRoutes(routes);
 
       // asserts
       expect(length).to.equal(4);
     });
   });
 
-  describe('#route()', () => {
-    it('expect to use a route', () => {
+  describe('#setRoute()', () => {
+    it('expect to set a route', () => {
       // arranges
       const actionPath = 'get /resolve/:id';
       const on = { topic: 'topic', type: 'type', quality: 'quality' };
       const instance = new Router();
 
       // acts
-      const route = instance.route(actionPath, on);
+      const route = instance.setRoute(actionPath, on);
 
       // asserts
       expect(route instanceof Route).to.be.true;
@@ -55,14 +55,14 @@ describe('router.js tests', () => {
   describe('#resolve()', () => {
     it('expect to parse from routes', () => {
       // arranges
+      const router = new Router();
       const routes = {
         'GET /product': { topic: 'topic0', type: 'type0', quality: 'quality0' },
         'GET /product/:id': { topic: 'topic1', type: 'type1', quality: 'quality1' },
         'POST /product/:id': { topic: 'topic2', type: 'type2', quality: 'quality2' },
         'PUT /product/:id': { topic: 'topic3', type: 'type3', quality: 'quality3' },
       };
-      const router = new Router();
-      router.parseFrom(routes);
+      router.setRoutes(routes);
 
       // acts
       const result01 = router.resolve('get', '/product/001');
