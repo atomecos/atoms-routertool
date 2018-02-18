@@ -1,6 +1,6 @@
 {
   "name": "atoms-routertool",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "Providing REST-to-Channel Router Tool as AtomServices Tool",
   "main": "./dst/index.js",
   "typings": "./typings/index.d.ts",
