@@ -1,7 +1,8 @@
-import { HttpRouter } from "atoms-httpcore";
+import { IProcessContext } from "atomservicescore";
+import { HttpContext, HttpRouter, IComposable } from "atoms-httpcore";
 import { Route } from "./route";
 
-export class Router implements HttpRouter {
+export class Router implements HttpRouter, IComposable {
   private Routes: Route[];
 
   constructor() {
@@ -38,6 +39,28 @@ export class Router implements HttpRouter {
       }
     }
 
-    return undefined;
+    return { channel: undefined, value: undefined };
+  }
+
+  toComposing() {
+    return async (ctx: HttpContext, next: () => Promise<void>) => {
+      try {
+        const { method, path } = ctx;
+        const { channel, value } = this.resolve(method, path);
+
+        if (channel) {
+          const context = ctx.process;
+          const payload = ctx.data(value);
+          const action = context.createAction(payload, channel);
+          ctx.body = await context.dispatchActionOnPromise(action);
+        } else {
+          ctx.status = 404;
+        }
+
+        await next();
+      } catch (error) {
+        ctx.status = 500;
+      }
+    };
   }
 }
