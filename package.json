@@ -1,6 +1,6 @@
 {
   "name": "atoms-routertool",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "description": "Providing REST-to-Channel Router Tool as AtomServices Tool",
   "main": "./dst/index.js",
   "typings": "./typings/index.d.ts",
@@ -26,8 +26,8 @@
   "license": "MIT",
   "repository": "git+https://github.com/atomecos/atoms-routertool",
   "dependencies": {
-    "atoms-httpcore": "0.0.1-alpha.20",
-    "atomservicescore": "0.1.0-alpha.30",
+    "atoms-httpcore": "0.0.1-alpha.22",
+    "atomservicescore": "0.1.0-alpha.31",
     "clone": "^2.1.1",
     "path-to-regexp": "^2.1.0"
   },
